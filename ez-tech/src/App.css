@@ -35,7 +35,9 @@ img {
 }
 
 .app-container {
-  height: calc(100vh - 150px);
+ display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -57,6 +59,11 @@ img {
   background-color: #f1f1f1;
   width: 100%;
 }
+.navbar {
+  /* Keep your existing styles, but maybe add a margin to look cleaner */
+  margin-bottom: 20px;
+}
+
 
 /* This is the new wrapper we added */
 .sidebar-container-inner {
@@ -83,14 +90,12 @@ img {
   color: #000;
 }
 
-/* This styles the checkbox list to have some space between items */
 .checkbox-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* This makes sure the text is next to the checkbox properly */
 .checkbox-list label {
   font-weight: normal;
   display: flex;
@@ -99,14 +104,23 @@ img {
   cursor: pointer;
 }
 
-/* New styles for the sidebar action buttons */
-.sidebar-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+
+
+.apply-button{
+  background: #E53935;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+.clear-button{
+  background: #E53935;
+   padding: 10px 30px;
+   border-radius: 15px;
+   cursor: pointer;
+   font-weight: bold;
 }
 
-/* New background color for the inner sidebar container */
 .sidebar-container-inner {
   background-color: #0C3C4C;
   height: 100%;
@@ -121,28 +135,121 @@ img {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
-  color: black;
+  color: rgb(0, 0, 0);
 }
 
 .sidebar-login h3 {
-  font-size: 1.1rem;
+  font-weight: bold;
   margin-bottom: 5px;
   color: #ffffff;
+  font-size: large;
 }
 
 .sidebar-login-btn {
-  background-color: #E53935; 
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
+  height: 40px;
+  border-radius: 15px;
   font-weight: bold;
+  font-display: block;
+  margin-bottom: 25%;
 }
 
-.sidebar-divider {
-  border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 15px;
+.sidebar-register-btn {
+  background-color: #e53935; 
+  color: white;
+  padding: 8px;
+  border-radius: 15px;
+  font-weight: bold;
+  width: 100%;
 }
+.sidebar-register-btn-page {
+  background-color: #e53935; 
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 8px;
+  width: 400px;
+
+}
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* This centers the Title and the Form */
+  justify-content: center;  /* This centers them vertically on the screen */
+  min-height: 50vh;        /* Uses the full height of the browser window */
+  width: 100%;
+  box-shadow: 0 2px 100px rgba(12, 60, 76,.5);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* This centers the labels and inputs inside the form */
+  width: 100%;
+  max-width: 400px;         /* Keeps it from getting too wide on desktop */
+}
+
+/* 3. The Labels and Inputs */
+.register-form label, 
+.register-form input {
+  width: 100%;              /* Makes them all the same width */
+  text-align: left;         /* Keeps the text inside the label on the left */
+  margin-bottom: 5px;
+}
+
+.sidebar-input {
+  padding: 15px;
+  margin-bottom: 15px;      /* Adds space between the input and the next label */
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+.profile.card{
+  border: 1px solid #ddd;
+  padding: 20px;
+  display: inline-block; 
+}
+.profile-page-container{
+  background-color: #b3b3b3;
+  border: 1px solid black;
+  margin-left: 450px;
+  margin-right: 450px;
+  margin-top: 150px;
+  text-align: center;
+  padding: 20px;
+}
+
+.sidebar-profile-btn{
+color: #ffffff;
+background-color:#E53935;
+padding: 8px;
+border-radius: 8px;
+margin-right: 70px;
+
+}
+.sidebar-logout-btn{
+  color: #ffffff;
+  background-color:#E53935;
+padding: 8px;
+border-radius: 8px;
+}
+.apply-button-movies{
+padding: 5px;
+margin-right: 40px;
+color: #ffffff;
+background-color: #E53935;
+}
+.add-movie-form{
+  padding: 50px;
+margin-left: 40%;
+margin-right: 25%;
+}
+.sidebar-input-movies{
+  width: 36%;
+  height: 40px;
+}
+/*
+.carousel-container {
+  width: 100%;
+  max-width: 1200px; 
+  margin: 0 auto 30px auto;
+}
+*/

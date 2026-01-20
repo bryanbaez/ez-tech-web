@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2b0445ea.css",
+    "main.js": "/static/js/main.789a7cd7.js",
+    "static/js/453.0b0ee525.chunk.js": "/static/js/453.0b0ee525.chunk.js",
+    "static/media/CoLogo.png": "/static/media/CoLogo.338459c2984d3975dfb8.png",
+    "index.html": "/index.html",
+    "main.2b0445ea.css.map": "/static/css/main.2b0445ea.css.map",
+    "main.789a7cd7.js.map": "/static/js/main.789a7cd7.js.map",
+    "453.0b0ee525.chunk.js.map": "/static/js/453.0b0ee525.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2b0445ea.css",
+    "static/js/main.789a7cd7.js"
+  ]
+}
