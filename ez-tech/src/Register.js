@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { Await, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
 
 const Register = ({setCurrentUser, setSidebarOpen}) => {
@@ -7,7 +7,7 @@ const Register = ({setCurrentUser, setSidebarOpen}) => {
     const [pass, setPass] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
     const navigate = useNavigate();
-    const [firstname, setFirstname] =useState("");
+    const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
 
 
@@ -73,21 +73,27 @@ const userExists = existingUsers.find(user => user.email === email);
             <h1 className ="page-title">Register</h1>
             <form onSubmit={handleRegister} className="register-form">
                 
-                <label htmlFor='firstname'>Please enter First name:</label>
-                    <input
-                        type="text" 
-                        placeholder="First Name" 
-                        onChange={(e) => setFirstname(e.target.value)} 
-                        className="sidebar-input"
+                <div className="form-row">
+                    <div className="form-group">
+                        <label htmlFor='firstname'>First Name:</label>
+                        <input
+                            type="text" 
+                            placeholder="First Name" 
+                            onChange={(e) => setFirstname(e.target.value)} 
+                            className="sidebar-input"
                         />
-                        
-                <label htmlFor='lastname'>Please enter last name:</label>
-                    <input
-                        type="text" 
-                        placeholder="Last Name" 
-                        onChange={(e) => setLastname(e.target.value)} 
-                        className="sidebar-input"
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor='lastname'>Last Name:</label>
+                        <input
+                            type="text" 
+                            placeholder="Last Name" 
+                            onChange={(e) => setLastname(e.target.value)} 
+                            className="sidebar-input"
                         />
+                    </div>
+                </div>
+
                 <label htmlFor="email">Please enter your email: </label>
                     <input
                         id="email"

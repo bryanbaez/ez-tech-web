@@ -6,27 +6,24 @@ const SidebarContent = ({
   loginPass, setLoginPass, 
   setSidebarOpen, 
   currentUser, setCurrentUser,
-  searchTerm, setSearchTerm // 1. Added these props
 }) => { 
 
   const handleLogout = () => {
     setCurrentUser(null);
-    setSearchTerm(""); // Clear search on logout for security
+    setLoginUser("");
+    setLoginPass("");
+    // REMOVED: setSearchTerm("") - This variable is no longer in this file
     alert("You have logged out");
   };
 
   return (
     <div className="sidebar-container-inner">
       
-      {/* SECTION 1: SEARCH (Always visible) */}
-      
-
-
-      {/* SECTION 2: USER AUTHENTICATION */}
+      {/* SECTION 1: ACCOUNT */}
       {currentUser ? (
-        <div className='sidebar-login-btn'>
+        <div className='sidebar-login-container'>
           <h3>Welcome, {currentUser.name || currentUser.email}!</h3>
-          <div className='user-actions' style={{ display: 'flex', gap: '10px' }}>
+          <div className='user-actions'>
             <Link to="/profile" onClick={() => setSidebarOpen(false)}>
               <button className="sidebar-profile-btn">View Profile</button>
             </Link>
@@ -46,36 +43,28 @@ const SidebarContent = ({
         /> 
       )}
 
-<div className="sidebar-groups">
-        <label htmlFor="movie-search">Search Your Movies</label>
-        <input 
-          type="text" 
-          id="movie-search" 
-          placeholder="Type to filter..." 
-          value={searchTerm} // 2. Connected to state
-          onChange={(e) => setSearchTerm(e.target.value)} // 3. Connected to state
-          className="sidebar-input"
-        />
-      </div>
-      <div className="sidebar-checkboxes" style={{ marginTop: '20px' }}>
-        <label>Categories:</label>
+      {/* FIXED: Removed the extra closing </div> that was here */}
+
+      {/* SECTION 2: FILTERS */}
+      <div className="sidebar-checkboxes">
+        <label className="sidebar-label">Categories:</label>
         <div className="checkboxes-list">
-          <label><input type="checkbox" name="action" value="Action" /> Action</label>
-          <label><input type="checkbox" name="comedy" value="Comedy" /> Comedy</label>
-          <label><input type="checkbox" name="drama" value="Drama" /> Drama</label>
-          <label><input type="checkbox" name="horror" value="Horror" /> Horror</label>
+          <label><input type="checkbox" name="action" value="Action" /> Action</label><br/>
+          <label><input type="checkbox" name="comedy" value="Comedy" /> Comedy</label><br/>
+          <label><input type="checkbox" name="drama" value="Drama" /> Drama</label><br/>
+          <label><input type="checkbox" name="horror" value="Horror" /> Horror</label><br/>
           <label><input type="checkbox" name="sci-fi" value="Sci-Fi" /> Sci-Fi</label>
         </div>
       </div>
       
-      <div className="sidebar-action" style={{ marginTop: '20px' }}>
+      {/* SECTION 3: ACTIONS */}
+      <div className="sidebar-action">
         <button className="apply-button" onClick={() => setSidebarOpen(false)}>
           Apply Filters
         </button>
-        <button className="clear-button" onClick={() => setSearchTerm("")}>
-          Clear Search
-        </button>
+        {/* REMOVED: The Clear Search button from here */}
       </div> 
+
     </div>      
   );
 };

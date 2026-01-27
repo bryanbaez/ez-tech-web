@@ -4,11 +4,11 @@ import CoLogo from './CoLogo.png';
 import { useState } from 'react';
 import Sidebar from 'react-sidebar';
 import SidebarContent from './SidebarContent';
-import Navbar, { Home, Movies, About, Cart } from './Navbar'; 
+import Navbar, {  About, Cart } from './Navbar'; 
 import Register from './Register';
 import Profile from './Profile'; 
 import StreamList from './StreamList';
-import FeatureCarousel from './FeatureCarousel'
+import Movies from './Movies';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -19,10 +19,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app-title">
-        <img src={CoLogo} alt="Company Logo" />
-      </div>
-    
       <div className="app-container"> 
         <Sidebar
           sidebar={
@@ -40,10 +36,14 @@ function App() {
           }
           open={sidebarOpen}
           onSetOpen={setSidebarOpen} 
+          styles={{ sidebar: { zIndex: 100, background: "#0C3C4C" } }}
         > 
           
 
           <div className="sidebar-content-wrapper">
+            <div className="app-title">
+              <img src={CoLogo} alt="Company Logo" />
+            </div>
             <Navbar />
 
             <div className="routes-container">
@@ -52,9 +52,12 @@ function App() {
                 currentUser={currentUser}
                 setCurrentUser={setCurrentUser} 
                 searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
               
                 />} />
-                <Route path="/Movies" element={<Movies setSidebarOpen={setSidebarOpen} />} />
+                <Route path="/Movies" element={<Movies setSidebarOpen={setSidebarOpen}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser} />} />
                 <Route path="/Cart" element={<Cart setSidebarOpen={setSidebarOpen} />} />
                 <Route path="/About" element={<About setSidebarOpen={setSidebarOpen} />} />
                 <Route path= "/Register" element={<Register setCurrentUser= {setCurrentUser} setSidebarOpen={setSidebarOpen} />} />
