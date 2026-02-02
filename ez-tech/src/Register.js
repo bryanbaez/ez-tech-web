@@ -22,9 +22,18 @@ const Register = ({setCurrentUser, setSidebarOpen}) => {
                 
                 return password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
     };
+
+    const validateEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
     
     const handleRegister = async (e) => {
         e.preventDefault();
+
+        if (!validateEmail(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
          
         if (!validatePassword(pass)) {
             alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.");
@@ -55,6 +64,7 @@ const userExists = existingUsers.find(user => user.email === email);
 
     existingUsers.push(newUserData);
     localStorage.setItem("allUsers", JSON.stringify(existingUsers));
+    localStorage.setItem("currentUser", JSON.stringify(newUserData));
 
     setCurrentUser(newUserData);
     alert('Account created for ' + fullName + '!');
@@ -79,6 +89,7 @@ const userExists = existingUsers.find(user => user.email === email);
                         <input
                             type="text" 
                             placeholder="First Name" 
+                            value={firstname}
                             onChange={(e) => setFirstname(e.target.value)} 
                             className="sidebar-input"
                         />
@@ -88,6 +99,7 @@ const userExists = existingUsers.find(user => user.email === email);
                         <input
                             type="text" 
                             placeholder="Last Name" 
+                            value={lastname}
                             onChange={(e) => setLastname(e.target.value)} 
                             className="sidebar-input"
                         />
@@ -99,6 +111,7 @@ const userExists = existingUsers.find(user => user.email === email);
                         id="email"
                         type="text"
                         placeholder="Email"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="sidebar-input"
                     />
@@ -107,6 +120,7 @@ const userExists = existingUsers.find(user => user.email === email);
                         id= "pass"
                         type="password"
                         placeholder="Password"
+                        value={pass}
                         onChange={(e) => setPass(e.target.value)}
                         className="sidebar-input"
                     />

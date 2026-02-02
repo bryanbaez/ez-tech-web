@@ -13,10 +13,13 @@ const MovieRow = ({ title, movies, currentUser, setCurrentUser, isStreamList }) 
   const handleAdd = (e, movie) => {
     e.stopPropagation(); 
     if (!currentUser) return alert("Log in first!");
+
+    const alreadyAdded = (currentUser.myMovies || []).some(m => m.id === movie.id);
+    if (alreadyAdded) return alert(`${movie.title} is already in your list!`);
     
     const newItem = {
       id: movie.id,
-      text: movie.title,
+      title: movie.title,
       completed: false,
       image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
       overview: movie.overview || "No description available", 
@@ -24,12 +27,8 @@ const MovieRow = ({ title, movies, currentUser, setCurrentUser, isStreamList }) 
       release_date: movie.release_date
     };
 
-    const allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
     const updatedList = [...(currentUser.myMovies || []), newItem];
-    const updatedUsers = allUsers.map(u => u.email === currentUser.email ? {...u, myMovies: updatedList} : u);
-    
-    localStorage.setItem("allUsers", JSON.stringify(updatedUsers));
-    setCurrentUser({...currentUser, myMovies: updatedList});
+    saveToStorage(updatedList);
     alert(`${movie.title} added!`);
   };
 
@@ -50,7 +49,10 @@ const MovieRow = ({ title, movies, currentUser, setCurrentUser, isStreamList }) 
     const allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
     const updatedUsers = allUsers.map(u => u.email === currentUser.email ? {...u, myMovies: updatedList} : u);
     localStorage.setItem("allUsers", JSON.stringify(updatedUsers));
-    setCurrentUser({...currentUser, myMovies: updatedList});
+    
+    const updatedCurrentUser = {...currentUser, myMovies: updatedList};
+    localStorage.setItem("currentUser", JSON.stringify(updatedCurrentUser));
+    setCurrentUser(updatedCurrentUser);
   };
 
   return (
@@ -61,30 +63,34 @@ const MovieRow = ({ title, movies, currentUser, setCurrentUser, isStreamList }) 
         <button className="handle handle-left" onClick={() => scroll('left')}>‹</button>
         
         <div className="movie-slider" ref={rowRef}>
-          {movies.map((movie) => (
-            <div 
-              key={movie.id} 
-              className="slider-card" 
-              onClick={() => setSelectedMovie(movie)} 
-            >
-              <img 
-                src={isStreamList ? movie.image : `https://image.tmdb.org/t/p/w300${movie.poster_path}`} 
-                alt={movie.title || movie.text} 
-              />
-              <div className="card-overlay">
-                {isStreamList ? (
-                  <>
-                    <button className="done-btn" onClick={(e) => handleToggle(e, movie.id)}>
-                      {movie.completed ? "↺" : "✓"}
-                    </button>
-                    <button className="del-btn" onClick={(e) => handleDelete(e, movie.id)}>✕</button>
-                  </>
-                ) : (
-                  <button onClick={(e) => handleAdd(e, movie)}>+</button>
-                )}
+          {movies.length > 0 ? (
+            movies.map((movie) => (
+              <div 
+                key={movie.id} 
+                className="slider-card" 
+                onClick={() => setSelectedMovie(movie)} 
+              >
+                <img 
+                  src={isStreamList ? movie.image : `https://image.tmdb.org/t/p/w300${movie.poster_path}`} 
+                  alt={movie.title || movie.text} 
+                />
+                <div className="card-overlay">
+                  {isStreamList ? (
+                    <>
+                      <button className="done-btn" onClick={(e) => handleToggle(e, movie.id)}>
+                        {movie.completed ? "↺" : "✓"}
+                      </button>
+                      <button className="del-btn" onClick={(e) => handleDelete(e, movie.id)}>✕</button>
+                    </>
+                  ) : (
+                    <button onClick={(e) => handleAdd(e, movie)}>+</button>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="no-movies-msg">No movies found in this category.</p>
+          )}
         </div>
 
         <button className="handle handle-right" onClick={() => scroll('right')}>›</button>
@@ -98,8 +104,8 @@ const MovieRow = ({ title, movies, currentUser, setCurrentUser, isStreamList }) 
             
             <div className="modal-body">
               <img 
-                src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path || selectedMovie.image.replace('https://image.tmdb.org/t/p/w500', '')}`} 
-                alt={selectedMovie.title} 
+                src={selectedMovie.image || `https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} 
+                alt={selectedMovie.title || selectedMovie.text} 
                 className="modal-poster"
               />
               <div className="modal-info">

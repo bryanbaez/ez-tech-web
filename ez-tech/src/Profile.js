@@ -14,7 +14,6 @@ const Profile = ({ currentUser, setSidebarOpen }) => {
       <div className="profile-card">
         <p><strong>Full Name:</strong> {currentUser.name}</p>
         <p><strong>Email Address:</strong> {currentUser.email}</p>
-        <p><strong>Account Password:</strong> {currentUser.pass}</p>
         
         <Link to="/">
           <button style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer', color: 'white', background: '#e53935'

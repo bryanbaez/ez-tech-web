@@ -21,13 +21,6 @@ const Navbar = () => {
 
 
 
-export const Movies = ({setSidebarOpen}) => (
-  <div>
-    <div className="button"><button onClick={() => setSidebarOpen(true)}>☰ Menu</button></div>
-    <h1 className="page-title">Movies</h1>
-  </div>
-);
-
 export const About = ({setSidebarOpen}) => (
   <div>
     <div className="button"><button onClick={() => setSidebarOpen(true)}>☰ Menu</button></div>

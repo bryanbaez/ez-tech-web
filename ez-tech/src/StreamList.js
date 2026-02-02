@@ -7,8 +7,8 @@ const StreamList = ({ setSidebarOpen, currentUser, setCurrentUser, searchTerm, s
 
   // 1. Separate your movies into "To Watch" and "Watched"
   // Also applies your search filter to both rows
-  const toWatch = movies.filter(m => !m.completed && m.text.toLowerCase().includes(searchTerm.toLowerCase()));
-  const watched = movies.filter(m => m.completed && m.text.toLowerCase().includes(searchTerm.toLowerCase()));
+  const toWatch = movies.filter(m => !m.completed && (m.title || m.text || "").toLowerCase().includes(searchTerm.toLowerCase()));
+  const watched = movies.filter(m => m.completed && (m.title || m.text || "").toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
     <div className="movies-page-container streamlist-page">

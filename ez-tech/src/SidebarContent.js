@@ -9,6 +9,7 @@ const SidebarContent = ({
 }) => { 
 
   const handleLogout = () => {
+    localStorage.removeItem("currentUser");
     setCurrentUser(null);
     setLoginUser("");
     setLoginPass("");

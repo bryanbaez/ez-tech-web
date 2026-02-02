@@ -15,6 +15,7 @@ const foundUser = allUsers.find(user => user.email === loginUser);
 const isMatch = await bcrypt.compare(loginPass, foundUser.pass);
 
   if (isMatch) {
+    localStorage.setItem("currentUser", JSON.stringify(foundUser));
     setCurrentUser(foundUser);
     setSidebarOpen(false);
     alert("Login Successful!");

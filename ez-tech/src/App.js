@@ -14,7 +14,10 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
-  const [currentUser, setCurrentUser]= useState(null);
+  const [currentUser, setCurrentUser]= useState(() => {
+    const savedUser = localStorage.getItem("currentUser");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -30,8 +33,6 @@ function App() {
             setLoginPass={setLoginPass} 
             setSidebarOpen={setSidebarOpen} 
             setCurrentUser={setCurrentUser} 
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             />
           }
           open={sidebarOpen}
@@ -57,7 +58,10 @@ function App() {
                 />} />
                 <Route path="/Movies" element={<Movies setSidebarOpen={setSidebarOpen}
                 currentUser={currentUser}
-                setCurrentUser={setCurrentUser} />} />
+                setCurrentUser={setCurrentUser}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                />} />
                 <Route path="/Cart" element={<Cart setSidebarOpen={setSidebarOpen} />} />
                 <Route path="/About" element={<About setSidebarOpen={setSidebarOpen} />} />
                 <Route path= "/Register" element={<Register setCurrentUser= {setCurrentUser} setSidebarOpen={setSidebarOpen} />} />
