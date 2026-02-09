@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "StreamList",
+  "name": "StreamList - Your Ultimate Streaming Guide",
+  "description": "StreamList is your ultimate streaming guide, providing a comprehensive platform to discover, track, and manage your favorite movies and TV shows across various streaming services. With StreamList, you can easily find where to watch your desired content, create personalized watchlists, and receive recommendations based on your viewing preferences. Whether you're a movie buff or a TV show enthusiast, StreamList helps you stay organized and up-to-date with the latest releases and streaming options.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,12 +11,15 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    
     }
   ],
   "start_url": ".",

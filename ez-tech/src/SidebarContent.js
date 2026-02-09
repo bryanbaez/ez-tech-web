@@ -44,7 +44,6 @@ const SidebarContent = ({
         /> 
       )}
 
-      {/* FIXED: Removed the extra closing </div> that was here */}
 
       {/* SECTION 2: FILTERS */}
       <div className="sidebar-checkboxes">
@@ -63,7 +62,6 @@ const SidebarContent = ({
         <button className="apply-button" onClick={() => setSidebarOpen(false)}>
           Apply Filters
         </button>
-        {/* REMOVED: The Clear Search button from here */}
       </div> 
 
     </div>      

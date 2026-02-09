@@ -9,7 +9,7 @@ import Register from './Register';
 import Profile from './Profile'; 
 import StreamList from './StreamList';
 import Movies from './Movies';
-
+/*AIzaSyBdffnQA1PPPT7ByaQ5KA4bxiX0UDykEWo */
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loginUser, setLoginUser] = useState("");
